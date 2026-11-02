@@ -4,10 +4,10 @@ import sitemap from '@astrojs/sitemap';
 import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 
-// GitHub Pages serves this repo at /Los-eternos-Website-/. With a custom domain,
+// GitHub Pages serves this repo at /firstrepo-/. With a custom domain,
 // build with BASE_PATH=/ and SITE_URL=https://your-domain.
 const site = process.env.SITE_URL ?? 'https://sebvstianlopz.github.io';
-const base = process.env.BASE_PATH ?? '/Los-eternos-Website-';
+const base = process.env.BASE_PATH ?? '/firstrepo-';
 
 export default defineConfig({
   site,
