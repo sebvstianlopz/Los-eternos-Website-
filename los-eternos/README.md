@@ -49,7 +49,7 @@ with a `client:*` directive (for example `client:visible`).
 ```sh
 cd los-eternos
 npm install
-npm run dev      # http://localhost:4321/firstrepo-/
+npm run dev      # http://localhost:4321/Los-eternos-Website-/
 npm run build    # outputs dist/
 ```
 
@@ -59,5 +59,5 @@ npm run build    # outputs dist/
 push to `main` that touches this folder. One-time setup: in the repository on GitHub, go to
 **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions**.
 
-The site then lives at `https://sebvstianlopz.github.io/firstrepo-/`. For a custom domain,
+The site then lives at `https://sebvstianlopz.github.io/Los-eternos-Website-/`. For a custom domain,
 set `SITE_URL=https://your-domain` and `BASE_PATH=/` in the workflow's build step.

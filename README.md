@@ -1,2 +1,8 @@
-# firstrepo-
-A indictor built for Pine Script based on High Volume areas, Reactions, SMT's and FVGs. Letting it spot potential trading scenarios using all these confluences and giving "buy" or "sell" signals in real time
+# Los Eternos — website
+
+Bilingual (ES/EN) catalog site for Los Eternos car rentals in the Dominican Republic.
+The site lives in [`los-eternos/`](los-eternos/); see its README for everyday edits,
+running it locally and publishing.
+
+Live at `https://sebvstianlopz.github.io/Los-eternos-Website-/`, deployed by
+`.github/workflows/los-eternos-pages.yml` on every push to `main` that touches the site.
