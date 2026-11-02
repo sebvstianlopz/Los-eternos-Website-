@@ -13,7 +13,7 @@ They tap **+** to build an order, then hit **"Mostrar al bartender"** to show a 
 
 Phones set to English open the English menu automatically. Everyone else gets Spanish, and there's an ES/EN button on the page.
 
-> ⚠️ All 20 drinks, prices, hours and the Instagram handle are **placeholders**. Replace them before printing the QR cards.
+> ⚠️ All 21 drinks, their prices, hours and the Instagram handle are **placeholders**. Replace them before printing the QR cards.
 
 ## Edit the menu
 
