@@ -1,0 +1,63 @@
+name: Deploy websites (Los Eternos + Santurtzi menu)
+
+# GitHub Pages serves one site per repo, so both projects are built into one artifact:
+#   /firstrepo-/            → los-eternos
+#   /firstrepo-/santurtzi/  → santurtzi (QR drinks menu)
+on:
+  push:
+    branches: [main]
+    paths: ['los-eternos/**', 'santurtzi/**', '.github/workflows/pages.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            los-eternos/package-lock.json
+            santurtzi/package-lock.json
+
+      - name: Build Los Eternos
+        working-directory: los-eternos
+        run: |
+          npm ci
+          npm run check
+          npm run build
+
+      - name: Build Santurtzi menu
+        working-directory: santurtzi
+        run: |
+          npm ci
+          npm run check
+          npm run build
+
+      - name: Combine sites
+        run: cp -r santurtzi/dist los-eternos/dist/santurtzi
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: los-eternos/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
