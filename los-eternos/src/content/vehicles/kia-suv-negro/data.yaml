@@ -1,9 +1,9 @@
 # Catálogo fila 46.
 brand: Kia
-model: { es: SUV, en: SUV }
+model: Sorento
 color: negro
-category: compacto
+category: suv
 priceDay: 70
-seats: 5             # estimado según el modelo, por confirmar
+seats: 7             # estimado según el modelo, por confirmar
 order: 46
 photos: [./1.jpg]

@@ -1,5 +1,6 @@
 # Catálogo fila 50.
-model: { es: SUV, en: SUV }
+brand: Honda
+model: CR-V
 color: negro
 category: suv
 priceDay: 90
