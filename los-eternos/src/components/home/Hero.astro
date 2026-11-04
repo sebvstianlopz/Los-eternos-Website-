@@ -158,9 +158,9 @@ const airports = site.locations.map((l) => l.label.es.match(/\((\w{3})\)/)?.[1])
        leaves the stage with the car instead of lingering at the right edge. */
     opacity: clamp(0, (1 - var(--p, 0)) * 4, 1);
   }
-  /* On top of the photo: the taillight's breathing glow and LED sweep, and tire smoke
-     billowing back from each tire. It spans x = -900…2000 and y = -500…900 of the photo,
-     so it is shifted down by its extra 233 units below the image (233 / 1400 of its height). */
+  /* On top of the photo: the taillight's breathing glow and LED sweep. Its canvas spans
+     x = -900…2000 and y = -500…900 of the photo, so it is shifted down by its extra 233 units
+     below the image (233 / 1400 of its height). */
   .hero :global(.hero-car)::after {
     z-index: 2;
     left: -45%;
@@ -168,7 +168,7 @@ const airports = site.locations.map((l) => l.label.es.match(/\((\w{3})\)/)?.[1])
     aspect-ratio: 2900 / 1400;
     transform: translateY(16.643%);
     background-image: var(--fx-img);
-    /* Trailing smoke leaves with the car, like the light trail. */
+    /* The glow fades as the car leaves, like the light trail. */
     opacity: clamp(0, (1 - var(--p, 0)) * 4, 1);
   }
   /* Reduced motion: no car and no scroll track, just the finished hero. */
