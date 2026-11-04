@@ -7,4 +7,3 @@ priceDay: 80
 seats: 7             # estimado según el modelo, por confirmar
 order: 49
 photos: [./1.jpg]
-photoPending: true    # reemplaza 1.jpg con la foto real y borra esta línea
