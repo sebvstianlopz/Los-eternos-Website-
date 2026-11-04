@@ -1,5 +1,6 @@
 # Catálogo fila 38.
-model: { es: SUV grande, en: Full-size SUV }
+brand: Chevrolet
+model: Tahoe
 color: negro
 category: lujo
 priceDay: 320
