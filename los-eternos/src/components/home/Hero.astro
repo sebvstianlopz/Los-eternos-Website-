@@ -1,6 +1,5 @@
 ---
 import { Image } from 'astro:assets';
-import { ScrollFlyIn } from '@/components/ui/hero-section-3';
 import WaButton from '../WaButton.astro';
 import Icon from '../Icon.astro';
 import heroImg from '../../assets/hero.jpg';
@@ -27,18 +26,13 @@ const prices = vehicles.map((v) => v.data.priceDay).filter((p): p is number => !
   class="hero"
   style={`--trail-img: url(${asset('images/hero-car-trail.svg')}); --fx-img: url(${asset('images/hero-car-fx.svg')})`}
 >
-  {/* A car drives across as the visitor scrolls; the headline and booking bar wipe in behind it. */}
-  <ScrollFlyIn
-    client:load
-    imageUrl={asset('images/hero-car.webp')}
-    imageAlt=""
-    reveal
-    revealAt={0.055}
-    className="hero-fly"
-    stickyClassName="hero-stage"
-    imageClassName="hero-car"
-  >
-    <div slot="background" class="backdrop">
+  {/* A car drives across as the visitor scrolls; the headline and booking bar wipe in behind
+      it. The stage sticks while the tall track scrolls past, and --p (0 → 1, set by the script
+      below) moves the car and the reveal. With reduced motion or no JavaScript there's no
+      track and no car: the stage is just the finished hero. */}
+  <div class="hero-fly" data-fly style="--reveal-at: 0.055">
+   <div class="hero-stage">
+    <div class="backdrop">
       <div class="frame">
         <Image
           class="photo"
@@ -62,11 +56,12 @@ const prices = vehicles.map((v) => v.data.priceDay).filter((p): p is number => !
       </a>
     </div>
 
-    <div slot="hint" class="cue mono" aria-hidden="true">
+    <div class="cue mono" aria-hidden="true" data-fly-hint>
       <span>{d.hero.cue}</span>
       <span class="arrow">↓</span>
     </div>
 
+    <div class="reveal" data-fly-content>
     <div class="content">
       <h1>
         <span class="visually-hidden">Los Eternos. </span>
@@ -89,12 +84,49 @@ const prices = vehicles.map((v) => v.data.priceDay).filter((p): p is number => !
       </form>
       <WaButton lang={lang} label={d.wa.write} variant="ghost" class="wa" />
     </div>
-  </ScrollFlyIn>
-  {/* Without JavaScript there is no car, so show everything. */}
-  <noscript><style>[data-fly-content] { clip-path: none !important; }</style></noscript>
+    </div>
+
+    <div class="hero-car" aria-hidden="true">
+      <img
+        src={asset('images/hero-car.webp')}
+        srcset={[640, 960, 1280, 1600].map((w) => `${asset(`images/hero-car-${w}.webp`)} ${w}w`).join(', ') + `, ${asset('images/hero-car.webp')} 2000w`}
+        sizes="(max-width: 760px) 104vw, 64vw"
+        width="2000"
+        height="667"
+        alt=""
+        draggable="false"
+        decoding="async"
+      />
+    </div>
+   </div>
+  </div>
 </section>
 
 <script>
+  // The drive: --p follows the scroll through the hero's track (0 when its top reaches the
+  // top of the screen, 1 just before its end, with a short rest at both ends), and the CSS
+  // moves the car and the reveal from it. The "scroll" cue fades out over the first stretch.
+  const clamp = (n: number) => Math.min(1, Math.max(0, n));
+  const track = document.querySelector<HTMLElement>('[data-fly]');
+  const stage = track?.querySelector<HTMLElement>('.hero-stage');
+  const hint = track?.querySelector<HTMLElement>('[data-fly-hint]');
+  if (track && stage && document.documentElement.classList.contains('motion')) {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const r = track.getBoundingClientRect();
+      const t = clamp(-r.top / (r.height - innerHeight));
+      stage.style.setProperty('--p', clamp((t - 0.04) / 0.78).toFixed(4));
+      if (hint) hint.style.opacity = String(clamp(1 - t / 0.12));
+    };
+    const queue = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    addEventListener('scroll', queue, { passive: true });
+    addEventListener('resize', queue);
+    update();
+  }
+
   // Keyboard users can tab into the hero before the car has revealed it. When a control
   // there gets focus, jump to the point where the reveal is complete so it is visible.
   const fly = document.querySelector<HTMLElement>('.hero-fly');
@@ -119,30 +151,74 @@ const prices = vehicles.map((v) => v.data.priceDay).filter((p): p is number => !
     padding: 4px var(--gutter) 0;
   }
 
-  /* Elements rendered by the React component (no Astro scope attribute). */
-  .hero :global(.hero-fly) {
+  .hero-fly {
     --fly-w: 64%;
     --car-pb: clamp(16px, 3vw, 48px);
     --reveal-feather: 24%;
+    position: relative;
+  }
+  .hero-stage {
+    position: relative;
+    height: calc(100svh - 92px);
+    overflow: hidden;
+  }
+  /* The revealed layer covers the stage; only the copy itself takes clicks. */
+  .reveal {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+  }
+  /* The car: its left edge travels from -W (off-screen left) to 100% (off-screen right). */
+  .hero-car {
+    position: absolute;
+    top: 0;
+    left: calc(var(--p, 0) * (100% + var(--fly-w)) - var(--fly-w));
+    z-index: 20;
+    display: none;
+    align-items: flex-end;
+    width: var(--fly-w);
+    height: 100%;
+    padding-bottom: var(--car-pb);
+    pointer-events: none;
+  }
+  .hero-car img {
+    width: 100%;
+    max-width: none;
+    height: auto;
+    user-select: none;
+  }
+  /* The drive itself, only with motion (JavaScript on, no reduced-motion preference). */
+  :global(html.motion) .hero-fly {
     height: 240vh;
   }
-  .hero :global(.hero-stage) {
+  :global(html.motion) .hero-stage {
+    position: sticky;
     top: 80px;
-    height: calc(100svh - 92px);
   }
-  .hero :global(.hero-car) {
-    align-items: flex-end;
-    padding-bottom: var(--car-pb);
+  :global(html.motion) .hero-car {
+    display: flex;
+  }
+  /* The headline and booking bar wipe in behind the car's rear: fully shown left of the
+     edge, fading in over a band that narrows to nothing as the car leaves. The clip sits
+     where the mask is already transparent, so it's never seen but keeps hidden controls
+     unclickable. */
+  :global(html.motion) .reveal {
+    --edge: calc(var(--p, 0) * (100% + var(--fly-w)) - var(--fly-w) + var(--reveal-at) * var(--fly-w));
+    --feather: calc(var(--reveal-feather) * (1 - var(--p, 0)));
+    -webkit-mask-image: linear-gradient(to right, #000 calc(var(--edge) - var(--feather)), transparent var(--edge));
+    mask-image: linear-gradient(to right, #000 calc(var(--edge) - var(--feather)), transparent var(--edge));
+    clip-path: inset(0 calc(100% - var(--edge)) 0 0);
   }
   /* Light effects drawn in the car photo's own pixel space (2000 × 667) and laid over the
      image box: the box sits at the bottom of the car container, full width, width / 3 tall.
      Layer order: trail (under the car) → car photo → taillight glow (on top). */
-  .hero :global(.hero-car img) {
+  .hero-car img {
     position: relative;
     z-index: 1;
   }
-  .hero :global(.hero-car)::before,
-  .hero :global(.hero-car)::after {
+  .hero-car::before,
+  .hero-car::after {
     content: '';
     position: absolute;
     bottom: var(--car-pb);
@@ -152,7 +228,7 @@ const prices = vehicles.map((v) => v.data.priceDay).filter((p): p is number => !
   /* Light trail: ribbons of light stream out of the taillight in an S-wave, with pulses
      racing back along them. It spans x = -1400…300 and y = -100…767 of the photo, so it
      is shifted down by its extra 100 units below the image (100 / 867 of its height). */
-  .hero :global(.hero-car)::before {
+  .hero-car::before {
     z-index: 0;
     left: -70%;
     width: 85%;
@@ -166,7 +242,7 @@ const prices = vehicles.map((v) => v.data.priceDay).filter((p): p is number => !
   /* On top of the photo: the taillight's breathing glow and LED sweep. Its canvas spans
      x = -900…2000 and y = -500…900 of the photo, so it is shifted down by its extra 233 units
      below the image (233 / 1400 of its height). */
-  .hero :global(.hero-car)::after {
+  .hero-car::after {
     z-index: 2;
     left: -45%;
     width: 145%;
@@ -175,16 +251,6 @@ const prices = vehicles.map((v) => v.data.priceDay).filter((p): p is number => !
     background-image: var(--fx-img);
     /* The glow fades as the car leaves, like the light trail. */
     opacity: clamp(0, (1 - var(--p, 0)) * 4, 1);
-  }
-  /* Reduced motion: no car and no scroll track, just the finished hero. */
-  @media (prefers-reduced-motion: reduce) {
-    .hero :global(.hero-fly) {
-      height: auto;
-    }
-  }
-  /* The revealed layer covers the stage; only the copy itself takes clicks. */
-  .hero :global([data-fly-content]) {
-    pointer-events: none;
   }
 
   .backdrop {
@@ -285,10 +351,15 @@ const prices = vehicles.map((v) => v.data.priceDay).filter((p): p is number => !
     position: absolute;
     left: clamp(28px, 5vw, 64px);
     bottom: clamp(40px, 6vw, 80px);
-    display: flex;
+    z-index: 30;
+    display: none;
     align-items: center;
     gap: 14px;
     color: var(--text);
+    pointer-events: none;
+  }
+  :global(html.motion) .cue {
+    display: flex;
   }
   .cue::before {
     content: '';
@@ -363,10 +434,12 @@ const prices = vehicles.map((v) => v.data.priceDay).filter((p): p is number => !
       padding-inline: 10px;
     }
     /* Drive across the booking bar, the part it reveals. */
-    .hero :global(.hero-fly) {
+    .hero-fly {
       --fly-w: 104%;
       --reveal-feather: 40%;
       --car-pb: calc((100svh - 92px) * 0.22);
+    }
+    :global(html.motion) .hero-fly {
       height: 220vh;
     }
     .frame {
