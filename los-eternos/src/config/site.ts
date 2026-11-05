@@ -17,7 +17,7 @@ export const site = {
   },
   social: {
     // Full profile URL, e.g. https://instagram.com/loseternos. Empty hides the links.
-    instagram: '' as string,
+    instagram: 'https://www.instagram.com/eternosrentalcars_rd/' as string,
   },
 } as const;
 
