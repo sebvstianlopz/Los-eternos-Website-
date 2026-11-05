@@ -1,5 +1,6 @@
 ---
 import WaButton from './WaButton.astro';
+import Icon from './Icon.astro';
 import { t, formatPrice } from '../i18n';
 import { site, type Lang } from '../config/site';
 import { vehicleFullName, fleetNo, forRent, forSale, type Vehicle } from '../lib/vehicles';
@@ -51,18 +52,17 @@ const salePrice = v.data.priceSale ? formatPrice(v.data.priceSale, lang, site.cu
           <input class="input" type="date" id="bk-to" name="to" />
         </div>
       </div>
+      {/* We deliver anywhere in the country; the client tells us where on WhatsApp. */}
       <div class="field">
-        <label for="bk-place">{d.booking.where}</label>
-        <select class="select" id="bk-place" name="place">
-          {site.locations.map((l) => <option value={l.label[lang]} data-city={l.city}>{l.label[lang]}</option>)}
-        </select>
+        <span class="label">{d.booking.where}</span>
+        <p class="anywhere"><Icon name="pin" size={18} />{d.booking.anywhere}</p>
       </div>
       <p class="total" aria-live="polite" data-total>{d.booking.pickDates}</p>
       <WaButton
         lang={lang}
         label={d.wa.book}
         block
-        intent={{ kind: 'rent', car, fleet, place: site.locations[0].label[lang], url: pageUrl }}
+        intent={{ kind: 'rent', car, fleet, url: pageUrl }}
         class="bk-btn"
       />
     </div>
@@ -96,7 +96,6 @@ const salePrice = v.data.priceSale ? formatPrice(v.data.priceSale, lang, site.cu
     const $ = <T extends Element>(sel: string) => panel.querySelector<T>(sel);
     const from = $<HTMLInputElement>('#bk-from');
     const to = $<HTMLInputElement>('#bk-to');
-    const place = $<HTMLSelectElement>('#bk-place');
     const visit = $<HTMLInputElement>('#bk-visit');
     const total = $<HTMLElement>('[data-total]');
     let active: 'rent' | 'sale' = panel.dataset.default === 'sale' ? 'sale' : 'rent';
@@ -111,13 +110,6 @@ const salePrice = v.data.priceSale ? formatPrice(v.data.priceSale, lang, site.cu
     if (from) from.min = today;
     if (to) to.min = addDays(today, 1);
     if (visit) visit.min = today;
-
-    // Pre-select the delivery point in the city chosen on the home page.
-    try {
-      const city = sessionStorage.getItem('le:city');
-      const match = city && place ? [...place.options].find((o) => o.dataset.city === city) : null;
-      if (match && place) place.value = match.value;
-    } catch {}
 
     const money = (n: number) =>
       `US$ ${new Intl.NumberFormat(lang === 'es' ? 'es-DO' : 'en-US', { maximumFractionDigits: 0 }).format(n)}`;
@@ -171,7 +163,6 @@ const salePrice = v.data.priceSale ? formatPrice(v.data.priceSale, lang, site.cu
           from: days > 0 ? from!.value : undefined,
           to: days > 0 ? to!.value : undefined,
           days: days > 0 ? days : undefined,
-          place: place?.value,
           url,
         };
       } else {
@@ -272,6 +263,20 @@ const salePrice = v.data.priceSale ? formatPrice(v.data.priceSale, lang, site.cu
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 10px;
+  }
+  .anywhere {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    background: var(--panel-2);
+    color: var(--text);
+  }
+  .anywhere :global(svg) {
+    flex: none;
+    color: var(--signal-text);
   }
   .total {
     display: grid;
