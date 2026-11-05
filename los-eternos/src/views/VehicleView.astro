@@ -148,7 +148,7 @@ const specs = [
       </p>
       <a
         class="btn btn-primary bar-btn"
-        href={waLink(forRent(v) && data.priceDay ? { kind: 'rent', car: fullName, fleet, place: site.locations[0].label[lang], url: pageUrl } : { kind: 'sale', car: fullName, fleet, url: pageUrl }, lang)}
+        href={waLink(forRent(v) && data.priceDay ? { kind: 'rent', car: fullName, fleet, url: pageUrl } : { kind: 'sale', car: fullName, fleet, url: pageUrl }, lang)}
         target="_blank"
         rel="noopener"
         data-wa
