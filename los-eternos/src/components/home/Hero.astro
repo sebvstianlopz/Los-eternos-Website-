@@ -18,6 +18,12 @@ const categories = categorySummary(vehicles).map((c) => c.category);
 const prices = vehicles.map((v) => v.data.priceDay).filter((p): p is number => !!p);
 const airports = site.locations.map((l) => l.label.es.match(/\((\w{3})\)/)?.[1]).filter(Boolean);
 ---
+{/* Opening or reloading the home page always starts at the hero, not wherever the browser
+    last left the scroll (unless the link points at a section with #). Inline so it runs
+    before the browser restores the old position. */}
+<script is:inline>
+  if ('scrollRestoration' in history && !location.hash) history.scrollRestoration = 'manual';
+</script>
 <section
   class="hero"
   style={`--trail-img: url(${asset('images/hero-car-trail.svg')}); --fx-img: url(${asset('images/hero-car-fx.svg')})`}
