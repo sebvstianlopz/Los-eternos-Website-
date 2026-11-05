@@ -16,7 +16,8 @@ export const site = {
     en: 'Every day, 7:00 am to 10:00 pm',
   },
   social: {
-    instagram: 'https://instagram.com/',
+    // Full profile URL, e.g. https://instagram.com/loseternos. Empty hides the links.
+    instagram: '' as string,
   },
 } as const;
 

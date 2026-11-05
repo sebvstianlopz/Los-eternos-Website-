@@ -95,6 +95,15 @@ const prices = vehicles.map((v) => v.data.priceDay).filter((p): p is number => !
 </section>
 
 <script>
+  // Keyboard users can tab into the hero before the car has revealed it. When a control
+  // there gets focus, jump to the point where the reveal is complete so it is visible.
+  const fly = document.querySelector<HTMLElement>('.hero-fly');
+  fly?.querySelector('[data-fly-content]')?.addEventListener('focusin', () => {
+    const top = fly.getBoundingClientRect().top + scrollY;
+    const revealed = top + (fly.offsetHeight - innerHeight) * 0.86;
+    if (scrollY < revealed) scrollTo({ top: revealed, behavior: 'instant' });
+  });
+
   const form = document.querySelector<HTMLFormElement>('[data-hero]');
   form?.addEventListener('submit', () => {
     const cat = form.querySelector<HTMLSelectElement>('#hero-cat');

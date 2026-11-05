@@ -13,7 +13,7 @@ export function businessJsonLd(lang: Lang, origin: URL, vehicles: Vehicle[]) {
     priceRange: prices.length ? `US$ ${Math.min(...prices)} – US$ ${Math.max(...prices)}` : undefined,
     address: { '@type': 'PostalAddress', addressLocality: 'Santo Domingo', addressCountry: 'DO' },
     areaServed: { '@type': 'Country', name: 'República Dominicana' },
-    sameAs: [site.social.instagram],
+    sameAs: site.social.instagram ? [site.social.instagram] : undefined,
   };
 }
 

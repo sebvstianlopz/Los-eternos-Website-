@@ -411,8 +411,12 @@ const specs = [
     }
     .bar p {
       display: grid;
-      min-width: 0;
+      flex: 1 1 auto;
+      min-width: 7.5em;
       line-height: 1.35;
+    }
+    .bar .price {
+      white-space: nowrap;
     }
     .bar-name {
       overflow: hidden;
@@ -421,12 +425,27 @@ const specs = [
       color: var(--muted);
       font-size: 0.75rem;
     }
+    /* The button gives way first: on narrow phones its label wraps to two lines rather
+       than sliding over the price. */
     .bar-btn {
-      flex: none;
+      flex: 0 1 auto;
+      min-width: 0;
       padding-inline: 1.1em;
+      white-space: normal;
+      text-align: center;
+    }
+    .bar-btn :global(svg) {
+      flex: none;
     }
     :global(body.has-bar) {
       padding-bottom: 76px;
+    }
+  }
+  @media (max-width: 380px) {
+    .bar-btn {
+      gap: 8px;
+      padding-inline: 0.8em;
+      letter-spacing: 0.04em;
     }
   }
 </style>
