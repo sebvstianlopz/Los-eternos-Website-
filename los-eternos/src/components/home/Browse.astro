@@ -41,9 +41,10 @@ const services = [
             <span class="badge" aria-hidden="true"><Icon name="arrow-up-right" size={16} /></span>
             <span class="text">
               <span class="name">{d.category[g.category]}</span>
-              <span class="mono meta" data-odo>
-                {d.browse.count(g.count)}
-                {g.from && ` · ${d.from} ${formatPrice(g.from, lang, site.currency)}${d.perDay}`}
+              <span class="mono meta">
+                <span data-odo>{d.browse.count(g.count)}</span>
+                {g.from && <span class="sep" aria-hidden="true"> · </span>}
+                {g.from && <span data-odo>{`${d.from} ${formatPrice(g.from, lang, site.currency)}${d.perDay}`}</span>}
               </span>
             </span>
           </a>
@@ -232,9 +233,30 @@ const services = [
     }
     .name {
       font-size: var(--step-0);
+      font-stretch: 100%;
+    }
+    /* Narrow tiles: the count and the price each get their own line. */
+    .meta {
+      font-size: 0.72rem;
+    }
+    .meta > :global(*) {
+      display: block;
+    }
+    .meta > .sep {
+      display: none;
     }
     .desc {
       display: none;
+    }
+  }
+  /* The smallest phones: one tile per row, so names and prices fit. */
+  @media (max-width: 359px) {
+    .bento {
+      grid-template-columns: minmax(0, 1fr);
+      grid-auto-rows: 150px;
+    }
+    .big {
+      grid-column: auto;
     }
   }
 </style>

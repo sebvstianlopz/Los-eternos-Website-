@@ -34,9 +34,11 @@ const year = new Date().getFullYear();
         <li>
           <a href={`tel:+${site.whatsapp}`}><Icon name="phone" size={18} /> {site.phoneDisplay}</a>
         </li>
-        <li>
-          <a href={site.social.instagram} target="_blank" rel="noopener"><Icon name="instagram" size={18} /> Instagram</a>
-        </li>
+        {site.social.instagram && (
+          <li>
+            <a href={site.social.instagram} target="_blank" rel="noopener"><Icon name="instagram" size={18} /> Instagram</a>
+          </li>
+        )}
         <li class="muted"><Icon name="clock" size={18} /> {site.hours[lang]}</li>
       </ul>
     </div>

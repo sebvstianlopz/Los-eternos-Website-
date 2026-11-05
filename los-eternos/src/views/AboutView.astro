@@ -29,7 +29,9 @@ const other: Lang = lang === 'es' ? 'en' : 'es';
         <ul>
           <li><a href={waLink({ kind: 'general' }, lang)} target="_blank" rel="noopener"><Icon name="whatsapp" /> WhatsApp {site.phoneDisplay}</a></li>
           <li><a href={`tel:+${site.whatsapp}`}><Icon name="phone" /> {site.phoneDisplay}</a></li>
-          <li><a href={site.social.instagram} target="_blank" rel="noopener"><Icon name="instagram" /> Instagram</a></li>
+          {site.social.instagram && (
+            <li><a href={site.social.instagram} target="_blank" rel="noopener"><Icon name="instagram" /> Instagram</a></li>
+          )}
         </ul>
       </section>
       <section aria-labelledby="hours-title">
