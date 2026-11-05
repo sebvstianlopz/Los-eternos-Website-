@@ -117,12 +117,6 @@ const other: Lang = lang === 'es' ? 'en' : 'es';
     const field = form.elements.namedItem(key);
     if (field instanceof RadioNodeList || field instanceof HTMLSelectElement) field.value = value;
   }
-  const city = params.get('city');
-  if (city) {
-    try {
-      sessionStorage.setItem('le:city', city);
-    } catch {}
-  }
 
   const matches = (li: HTMLLIElement, data: FormData) => {
     const mode = String(data.get('mode') ?? '');

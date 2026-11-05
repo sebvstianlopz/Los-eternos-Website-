@@ -36,7 +36,7 @@ const es = {
     title: ['Nuestra', 'prioridad es', 'tu comodidad'],
     sub: 'Más de 50 vehículos listos en República Dominicana. Elige el tuyo, escríbenos por WhatsApp y te lo entregamos donde llegues.',
     categoryLabel: 'Tipo',
-    cityLabel: 'Ciudad',
+    everywhere: 'Entrega en todo el país',
     cta: 'Ver vehículos',
     scroll: 'Desliza',
     cue: 'Desliza para descubrir',
@@ -60,7 +60,7 @@ const es = {
     items: [
       { icon: 'shield', t: 'Seguro incluido', d: 'Todos los alquileres incluyen seguro básico. Te explicamos la cobertura antes de firmar.' },
       { icon: 'tag', t: 'El precio que ves', d: 'Te damos el total antes de reservar. Sin cargos que aparecen al final.' },
-      { icon: 'pin', t: 'Entrega donde estés', d: 'Aeropuertos de Santo Domingo, Punta Cana y Santiago, o directo a tu hotel.' },
+      { icon: 'pin', t: 'Entrega donde estés', d: 'Te lo llevamos a cualquier lugar de República Dominicana: el aeropuerto, tu hotel o tu casa.' },
       { icon: 'chat', t: 'Una persona real', d: 'Te atiende nuestro equipo por WhatsApp, antes, durante y después de tu viaje.' },
     ],
   },
@@ -68,7 +68,7 @@ const es = {
     title: 'Preguntas frecuentes',
     items: [
       { q: '¿Qué necesito para alquilar?', a: 'Licencia de conducir vigente, pasaporte o cédula, y una tarjeta de crédito para el depósito. La edad mínima es 21 años.' },
-      { q: '¿Pueden entregarme el vehículo en el aeropuerto?', a: 'Sí. Te esperamos en SDQ, PUJ o STI con el vehículo listo, y también lo entregamos en hoteles.' },
+      { q: '¿Dónde me entregan el vehículo?', a: 'Donde lo necesites, en cualquier lugar de República Dominicana: el aeropuerto, tu hotel o tu casa. Nos dices el lugar por WhatsApp.' },
       { q: '¿Cómo pago?', a: 'Aceptamos tarjeta, transferencia y efectivo en dólares o pesos dominicanos. Te enviamos los detalles por WhatsApp.' },
       { q: '¿Puedo alquilar por semanas o meses?', a: 'Sí. Escríbenos por WhatsApp con tus fechas y te enviamos el precio para estadías largas.' },
     ],
@@ -122,7 +122,7 @@ const es = {
     intro: 'Todo lo que hacemos para que tu único trabajo sea disfrutar el camino.',
     items: [
       { t: 'Alquiler por días, semanas o meses', d: 'Tarifas más bajas mientras más tiempo lo uses. Pregúntanos por alquileres mensuales.' },
-      { t: 'Entrega en aeropuerto y hotel', d: 'Te esperamos al salir del vuelo en SDQ, PUJ o STI, o lo llevamos a tu hotel.' },
+      { t: 'Entrega en todo el país', d: 'Te lo llevamos a cualquier lugar de República Dominicana: al salir de tu vuelo, a tu hotel o a tu casa.' },
       { t: 'Chofer privado', d: 'Un chofer profesional te lleva en el vehículo que elijas, para traslados, eventos o el viaje completo.' },
       { t: 'Asistencia en carretera', d: 'Si algo pasa en el camino, nos escribes y lo resolvemos.' },
     ],
@@ -140,9 +140,9 @@ const es = {
   footer: { tagline: 'Alquiler de vehículos en República Dominicana.', rights: 'Todos los derechos reservados.' },
   meta: {
     homeTitle: 'Los Eternos | Alquiler de vehículos en República Dominicana',
-    homeDesc: 'Alquila tu vehículo en República Dominicana: más de 50 SUV, todoterrenos y vehículos de lujo. Entrega en aeropuertos y hoteles. Reserva en minutos por WhatsApp.',
+    homeDesc: 'Alquila tu vehículo en República Dominicana: más de 50 SUV, todoterrenos y vehículos de lujo. Entrega en todo el país. Reserva en minutos por WhatsApp.',
     catalogDesc: 'Explora todos los vehículos de Los Eternos con su precio por día. Reserva por WhatsApp.',
-    servicesDesc: 'Alquiler por días, semanas o meses, entrega en aeropuerto y hotel, chofer privado y asistencia en carretera.',
+    servicesDesc: 'Alquiler por días, semanas o meses, entrega en todo el país, chofer privado y asistencia en carretera.',
     aboutDesc: 'Conoce a Los Eternos, alquiler de vehículos en República Dominicana.',
   },
 };
@@ -167,7 +167,7 @@ const en: Dict = {
     title: ['Our priority', 'is your', 'comfort'],
     sub: 'More than 50 vehicles ready in the Dominican Republic. Pick yours, message us on WhatsApp and we’ll deliver it wherever you land.',
     categoryLabel: 'Type',
-    cityLabel: 'City',
+    everywhere: 'Delivery nationwide',
     cta: 'See vehicles',
     scroll: 'Scroll',
     cue: 'Scroll to discover',
@@ -191,7 +191,7 @@ const en: Dict = {
     items: [
       { icon: 'shield', t: 'Insurance included', d: 'Every rental includes basic insurance. We explain the coverage before you sign.' },
       { icon: 'tag', t: 'The price you see', d: 'You get the total before you book. No charges showing up at the end.' },
-      { icon: 'pin', t: 'Delivered where you are', d: 'Santo Domingo, Punta Cana and Santiago airports, or straight to your hotel.' },
+      { icon: 'pin', t: 'Delivered where you are', d: 'We bring it anywhere in the Dominican Republic: the airport, your hotel or your home.' },
       { icon: 'chat', t: 'A real person', d: 'Our team helps you on WhatsApp before, during and after your trip.' },
     ],
   },
@@ -199,7 +199,7 @@ const en: Dict = {
     title: 'Frequently asked questions',
     items: [
       { q: 'What do I need to rent?', a: 'A valid driver’s license, passport or national ID, and a credit card for the deposit. Minimum age is 21.' },
-      { q: 'Can you deliver the vehicle at the airport?', a: 'Yes. We meet you at SDQ, PUJ or STI with the vehicle ready, and we also deliver to hotels.' },
+      { q: 'Where do you deliver the vehicle?', a: 'Wherever you need it, anywhere in the Dominican Republic: the airport, your hotel or your home. Just tell us where on WhatsApp.' },
       { q: 'How do I pay?', a: 'We accept card, bank transfer and cash in US dollars or Dominican pesos. We send the details on WhatsApp.' },
       { q: 'Can I rent by the week or month?', a: 'Yes. Message us on WhatsApp with your dates and we’ll send you the price for longer stays.' },
     ],
@@ -253,7 +253,7 @@ const en: Dict = {
     intro: 'Everything we do so your only job is enjoying the road.',
     items: [
       { t: 'Daily, weekly or monthly rentals', d: 'Lower rates the longer you keep it. Ask us about monthly rentals.' },
-      { t: 'Airport and hotel delivery', d: 'We meet you off your flight at SDQ, PUJ or STI, or bring it to your hotel.' },
+      { t: 'Delivery anywhere in the country', d: 'We bring it anywhere in the Dominican Republic: off your flight, to your hotel or to your home.' },
       { t: 'Private chauffeur', d: 'A professional driver takes you in the vehicle of your choice, for transfers, events or the whole trip.' },
       { t: 'Roadside assistance', d: 'If something happens on the road, message us and we’ll sort it out.' },
     ],
@@ -271,9 +271,9 @@ const en: Dict = {
   footer: { tagline: 'Car rentals in the Dominican Republic.', rights: 'All rights reserved.' },
   meta: {
     homeTitle: 'Los Eternos | Car rentals in the Dominican Republic',
-    homeDesc: 'Rent your vehicle in the Dominican Republic: 50+ SUVs, off-roaders and luxury cars. Airport and hotel delivery. Book in minutes on WhatsApp.',
+    homeDesc: 'Rent your vehicle in the Dominican Republic: 50+ SUVs, off-roaders and luxury cars. Delivery anywhere in the country. Book in minutes on WhatsApp.',
     catalogDesc: 'Browse every Los Eternos vehicle with its daily price. Book on WhatsApp.',
-    servicesDesc: 'Daily, weekly or monthly rentals, airport and hotel delivery, private chauffeur and roadside assistance.',
+    servicesDesc: 'Daily, weekly or monthly rentals, delivery anywhere in the country, private chauffeur and roadside assistance.',
     aboutDesc: 'Meet Los Eternos, car rentals in the Dominican Republic.',
   },
 };
