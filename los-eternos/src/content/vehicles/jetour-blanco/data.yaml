@@ -1,0 +1,8 @@
+# Añadido por el dueño después del catálogo original. Nombre tal como lo pidió: "JETOUR".
+model: Jetour
+color: blanco
+category: suv
+priceDay: 85
+seats: 5             # estimado según el modelo, por confirmar
+order: 53
+photos: [./1.jpg]

@@ -5,7 +5,7 @@ import WaButton from '../WaButton.astro';
 import Icon from '../Icon.astro';
 import heroImg from '../../assets/hero.jpg';
 import { t, path, asset, formatPrice } from '../../i18n';
-import { site, cities, type Lang } from '../../config/site';
+import { site, type Lang } from '../../config/site';
 import { categorySummary, type Vehicle } from '../../lib/vehicles';
 
 interface Props {
@@ -16,7 +16,6 @@ const { lang, vehicles } = Astro.props;
 const d = t(lang);
 const categories = categorySummary(vehicles).map((c) => c.category);
 const prices = vehicles.map((v) => v.data.priceDay).filter((p): p is number => !!p);
-const airports = site.locations.map((l) => l.label.es.match(/\((\w{3})\)/)?.[1]).filter(Boolean);
 ---
 {/* Opening or reloading the home page always starts at the hero, not wherever the browser
     last left the scroll (unless the link points at a section with #). Inline so it runs
@@ -54,7 +53,7 @@ const airports = site.locations.map((l) => l.label.es.match(/\((\w{3})\)/)?.[1])
         <ul class="data mono" aria-label={lang === 'es' ? 'La flota en cifras' : 'The fleet in numbers'}>
           <li>{d.catalog.count(vehicles.length)}</li>
           {prices.length > 0 && <li>{d.from} {formatPrice(Math.min(...prices), lang, site.currency)}{d.perDay}</li>}
-          <li>{airports.join(' / ')}</li>
+          <li>{d.hero.everywhere}</li>
         </ul>
       </div>
       <a class="rail mono" href="#browse-title">
@@ -83,12 +82,6 @@ const airports = site.locations.map((l) => l.label.es.match(/\((\w{3})\)/)?.[1])
             {categories.map((c) => <option value={c}>{d.category[c]}</option>)}
           </select>
         </div>
-        <div class="field">
-          <label for="hero-city">{d.hero.cityLabel}</label>
-          <select class="select" id="hero-city" name="city">
-            {cities.map((c) => <option value={c}>{c}</option>)}
-          </select>
-        </div>
         <button class="btn btn-primary go" type="submit">
           {d.hero.cta}
           <Icon name="chevron-right" size={18} />
@@ -106,9 +99,6 @@ const airports = site.locations.map((l) => l.label.es.match(/\((\w{3})\)/)?.[1])
   form?.addEventListener('submit', () => {
     const cat = form.querySelector<HTMLSelectElement>('#hero-cat');
     if (cat && !cat.value) cat.disabled = true; // keep the URL clean
-    try {
-      sessionStorage.setItem('le:city', form.querySelector<HTMLSelectElement>('#hero-city')?.value ?? '');
-    } catch {}
   });
 </script>
 
@@ -258,10 +248,10 @@ const airports = site.locations.map((l) => l.label.es.match(/\((\w{3})\)/)?.[1])
   .booking {
     --cut: 14px;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: end;
     gap: 10px;
-    width: min(100%, 720px);
+    width: min(100%, 560px);
     margin-top: 8px;
     padding: 14px;
     background: rgb(22 24 26 / 0.86);
@@ -398,16 +388,13 @@ const airports = site.locations.map((l) => l.label.es.match(/\((\w{3})\)/)?.[1])
       bottom: 28px;
     }
     .booking {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       padding: 10px;
     }
     .booking .select {
       padding: 0.6em 1.9em 0.6em 0.7em;
       background-position: right 0.6em center;
       font-size: 0.92rem;
-    }
-    .go {
-      grid-column: 1 / -1;
     }
     .rail {
       display: none;
