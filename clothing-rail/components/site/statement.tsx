@@ -28,7 +28,7 @@ export function Statement() {
           </p>
           <dl className="mt-14 grid grid-cols-2 gap-x-8 gap-y-8 border-t border-border pt-8 sm:grid-cols-4">
             {FACTS.map((fact) => (
-              <div key={fact.label} className="flex flex-col-reverse gap-1.5">
+              <div key={fact.label} className="flex flex-col-reverse justify-end gap-1.5">
                 <dt className="max-w-[18ch] text-[13px] leading-snug text-muted-foreground">{fact.label}</dt>
                 <dd className="font-display text-4xl leading-none tabular-nums tracking-tight">{fact.value}</dd>
               </div>
