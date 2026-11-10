@@ -1,8 +1,50 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import ClothingRailHero from "@/components/ui/product-rail-gallery";
-import { RAIL_DEMO_ITEMS } from "@/components/ui/product-rail-gallery-demo";
+import ClothingRailHero, { type RailGarment } from "@/components/ui/product-rail-gallery";
+
+const RAIL_ITEMS: RailGarment[] = [
+  {
+    id: "white-shirt",
+    name: "Poplin shirt · White",
+    kind: "shirt",
+    color: "#F2F2F0",
+    tag: "$84",
+    description: "Crisp cotton poplin with a point collar and a long, tuckable tail.",
+    details: ["Cotton poplin", "Point collar", "Mother-of-pearl buttons"],
+    image: "/garments/white-shirt.webp",
+  },
+  {
+    id: "mauve-longsleeve",
+    name: "Long-sleeve crew · Mauve",
+    kind: "knit",
+    color: "#8A6A6E",
+    tag: "$56",
+    description: "Heathered mauve jersey with a narrow rib collar. The one you reach for first.",
+    details: ["220 gsm jersey", "Slim through the body", "Rib collar"],
+    image: "/garments/mauve-longsleeve.webp",
+  },
+  {
+    id: "sand-tee",
+    name: "Heavyweight tee · Sand",
+    kind: "tee",
+    color: "#B9A46A",
+    tag: "$48",
+    description: "Boxy 240 gsm cotton in a washed sand, with a taped neck that keeps its shape.",
+    details: ["240 gsm", "Boxy fit", "Taped neck"],
+    image: "/garments/sand-tee.webp",
+  },
+  {
+    id: "cobalt-sweatshirt",
+    name: "Crewneck sweatshirt · Cobalt",
+    kind: "knit",
+    color: "#1F5FC4",
+    tag: "$78",
+    description: "Loopback fleece in a saturated cobalt, with deep ribbed cuffs and hem.",
+    details: ["400 gsm loopback", "Ribbed trims", "Garment-dyed"],
+    image: "/garments/cobalt-sweatshirt.webp",
+  },
+];
 
 /* The rail component is upstream code, so its heading is restyled from the outside. */
 const HERO_CLASSES = [
@@ -16,12 +58,12 @@ export function RailHero() {
   return (
     <ClothingRailHero
       id="rail"
-      items={RAIL_DEMO_ITEMS}
-      hanger="none"
+      items={RAIL_ITEMS}
+      hanger="wood"
       autoplay
       interval={2800}
-      eyebrow="Autumn rail · Ten pieces"
-      heading="Ten pieces, made once."
+      eyebrow="Autumn rail · Four pieces"
+      heading="Four pieces, made once."
       caption="Brush along the rail, slide a hanger, lift a piece to see the back."
       className={HERO_CLASSES}
       action={
