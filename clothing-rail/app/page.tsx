@@ -1,4 +1,4 @@
-import { RailHero } from "@/components/site/rail-hero";
+import { FanHero } from "@/components/site/fan-hero";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 import { Statement } from "@/components/site/statement";
@@ -11,7 +11,7 @@ export default function Home() {
       <SiteHeader />
       <main>
         <h1 className="sr-only">Halfmoor: ten pieces a season, made once</h1>
-        <RailHero />
+        <FanHero />
         <Statement />
         <Values />
         <StudioBand />
