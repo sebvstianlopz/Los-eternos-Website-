@@ -10,7 +10,7 @@ export default function Home() {
     <div id="top">
       <SiteHeader />
       <main>
-        <h1 className="sr-only">Halfmoor: ten pieces a season, made once</h1>
+        <h1 className="sr-only">Halfmoor: four pieces a season, made once</h1>
         <FanHero />
         <Statement />
         <Values />

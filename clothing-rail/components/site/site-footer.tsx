@@ -25,7 +25,7 @@ export function SiteFooter() {
           <div className="lg:col-span-2">
             <p className="font-display text-3xl leading-none tracking-tight">Halfmoor</p>
             <p className="mt-4 max-w-[34ch] text-[13px] leading-relaxed text-background/60">
-              Ten pieces a season, made once. Free repairs for as long as the cloth holds.
+              Four pieces a season, made once. Free repairs for as long as the cloth holds.
             </p>
           </div>
           {COLUMNS.map((column) => (

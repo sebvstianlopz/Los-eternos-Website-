@@ -27,7 +27,7 @@ export function StudioBand() {
             First pick, two days before the site.
           </h2>
           <p className="mt-6 max-w-[46ch] text-[15px] leading-relaxed text-background/70">
-            Each letter shows the ten pieces, the cloth they are cut from and how many of each
+            Each letter shows the four pieces, the cloth they are cut from and how many of each
             size we made. Readers can order 48 hours before the rail goes public.
           </p>
           <div className="mt-8 max-w-md">

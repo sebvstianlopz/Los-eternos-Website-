@@ -1,6 +1,6 @@
 const FACTS = [
-  { value: "10", label: "pieces on each season's rail" },
-  { value: "3", label: "mills we buy cloth from" },
+  { value: "4", label: "pieces on each season's rail" },
+  { value: "2", label: "mills we buy cloth from" },
   { value: "22", label: "people in the one workshop" },
   { value: "2019", label: "first run: a single tee" },
 ];

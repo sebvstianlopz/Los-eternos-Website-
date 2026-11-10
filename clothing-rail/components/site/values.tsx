@@ -2,8 +2,8 @@ const VALUES = [
   {
     key: "Cloth",
     title: "Heavy enough to hang straight",
-    body: "Jersey and fleece are knitted in Leicester from organic cotton at 240 and 400 gsm. The oxford and the lambswool come from two mills we visit every spring, before a single pattern is drawn.",
-    spec: ["240 gsm jersey", "400 gsm fleece", "2-ply lambswool"],
+    body: "Jersey and fleece are knitted in Leicester from organic cotton at 240 and 400 gsm. The shirting poplin comes from a mill we visit every spring, before a single pattern is drawn.",
+    spec: ["240 gsm jersey", "400 gsm fleece", "Cotton poplin"],
   },
   {
     key: "Fit",
