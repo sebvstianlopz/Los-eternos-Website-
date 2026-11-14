@@ -2,10 +2,10 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-// GitHub Pages serves this repo at /Los-eternos-Website-/. With a custom domain,
-// build with BASE_PATH=/ and SITE_URL=https://your-domain.
-const site = process.env.SITE_URL ?? 'https://sebvstianlopz.github.io';
-const base = process.env.BASE_PATH ?? '/Los-eternos-Website-';
+// The site is served at the root of its own domain (GitHub Pages with a custom domain).
+// To build it for a sub-path instead, set BASE_PATH (e.g. /some-path) and SITE_URL.
+const site = process.env.SITE_URL ?? 'https://eternoscarrental.com';
+const base = process.env.BASE_PATH ?? '/';
 
 export default defineConfig({
   site,
