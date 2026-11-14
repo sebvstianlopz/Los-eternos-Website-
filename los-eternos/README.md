@@ -45,11 +45,27 @@ npm run build    # outputs dist/
 
 ## Publishing
 
-`.github/workflows/los-eternos-pages.yml` builds and publishes to GitHub Pages on every
-push to `main` that touches this folder. One-time setup: in the repository on GitHub, go to
-**Settings → Pages → Build and deployment → Source** and choose **GitHub Actions**.
+The site lives at `https://eternoscarrental.com`, on the Hostinger hosting plan (website
+`eternoscarrental.com`, account `u676690450`, datacenter North Carolina). The domain is the
+default in `astro.config.mjs`, so canonical links, the sitemap and the links in WhatsApp
+messages use it.
 
-The site lives at `https://eternoscarrental.com`, set under **Settings → Pages → Custom
-domain** in the repository (the domain's DNS at Hostinger points at GitHub Pages). The
-domain is also the default in `astro.config.mjs`, so canonical links, the sitemap and the
-links in WhatsApp messages use it.
+To publish a change:
+
+```sh
+cd los-eternos
+npm run build
+HOSTINGER_API_TOKEN=... python3 scripts/deploy-hostinger.py
+```
+
+The script zips `dist/`, uploads it through Hostinger's API, has Hostinger replace the
+website's files with it, and clears the CDN cache. Create the token in hPanel → profile →
+**API**; keep it out of the repository and out of chats.
+
+Hosting settings that live in hPanel, not here: the free lifetime SSL certificate and the
+HTTP → HTTPS redirect (both on), the CDN (on) and the DNS records (`@` and `www` point at
+Hostinger's CDN). `public/.htaccess` sets the rest: security headers, the 404 page, no folder
+listings and the `www` → bare domain redirect.
+
+`.github/workflows/los-eternos-pages.yml` still publishes a copy to GitHub Pages on every
+push to `main`; `sebvstianlopz.github.io/Los-eternos-Website-/` redirects to the domain.
