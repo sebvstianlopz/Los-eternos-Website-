@@ -39,7 +39,7 @@ them if you replace `hero-car.webp`.
 ```sh
 cd los-eternos
 npm install
-npm run dev      # http://localhost:4321/Los-eternos-Website-/
+npm run dev      # http://localhost:4321/
 npm run build    # outputs dist/
 ```
 
@@ -49,5 +49,7 @@ npm run build    # outputs dist/
 push to `main` that touches this folder. One-time setup: in the repository on GitHub, go to
 **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions**.
 
-The site then lives at `https://sebvstianlopz.github.io/Los-eternos-Website-/`. For a custom domain,
-set `SITE_URL=https://your-domain` and `BASE_PATH=/` in the workflow's build step.
+The site lives at `https://eternoscarrental.com`, set under **Settings → Pages → Custom
+domain** in the repository (the domain's DNS at Hostinger points at GitHub Pages). The
+domain is also the default in `astro.config.mjs`, so canonical links, the sitemap and the
+links in WhatsApp messages use it.
